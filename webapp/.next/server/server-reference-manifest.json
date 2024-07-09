@@ -1,0 +1,14 @@
+{
+  "node": {
+    "11994d8240b2d5c142484c2ff1dc21b73089e86c": {
+      "workers": {
+        "app/page": "(rsc)/../node_modules/.pnpm/next@15.0.0-rc.0_@babel+core@7.24.7_babel-plugin-react-compiler@0.0.0-experimental-696af53-20_nhnni3ocd326rc4cqsiyzp32xu/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Faditya%2Fprojects%2F%40sst-console%2Fwebapp%2Fsrc%2Fapp%2Fpage.tsx%22%2C%5B%22%24%24ACTION_0%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "bjKCDWtAYQzcnsd83d29d2slBs/97JZSNK276ZvY0Ck="
+}

@@ -1,0 +1,40 @@
+{
+    "services": [
+        {
+            "name": "AWS IoT"
+        },
+        {
+            "name": "AWS Key Management Service"
+        },
+        {
+            "name": "AWS Lambda"
+        },
+        {
+            "name": "Amazon CloudFront"
+        },
+        {
+            "name": "Amazon DynamoDB"
+        },
+        {
+            "name": "Amazon Route 53"
+        },
+        {
+            "name": "Amazon Simple Notification Service"
+        },
+        {
+            "name": "Amazon Simple Queue Service"
+        },
+        {
+            "name": "Amazon Simple Storage Service"
+        },
+        {
+            "name": "AmazonCloudWatch"
+        },
+        {
+            "name": "CloudWatch Events"
+        },
+        {
+            "name": "Tax"
+        }
+    ]
+}

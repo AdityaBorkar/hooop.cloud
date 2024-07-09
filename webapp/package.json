@@ -1,0 +1,50 @@
+{
+  "name": "@sst-console/webapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --experimental-https",
+    "dev:sst": "sst dev 'next dev --experimental-https' --stage=dev",
+    "dev:tunnel": "cloudflared tunnel --config ./tunnel.yml run leo",
+    "dev:actions": "gh act push --secret-file ./.github/dev.secrets",
+    "lint": "next lint",
+    "build": "ANALYZE=true next build --experimental-debug-memory-usage",
+    "start": "next start",
+    "deploy": "sst deploy --stage=prod"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "cva": "npm:class-variance-authority@^0.7.0",
+    "next": "15.0.0-rc.0",
+    "next-auth": "5.0.0-beta.19",
+    "react": "19.0.0-rc-f994737d14-20240522",
+    "react-charts": "2.0.0-beta.7",
+    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "react-hook-form": "^7.52.1",
+    "react-icons": "^5.2.1",
+    "sonner": "^1.5.0",
+    "sst": "^2.43.3",
+    "superstruct": "^2.0.2",
+    "tailwind-merge": "^2.4.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "@next/bundle-analyzer": "^14.2.4",
+    "@tailwindcss/cli": "4.0.0-alpha.17",
+    "@tailwindcss/postcss": "4.0.0-alpha.17",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "babel-plugin-react-compiler": "0.0.0-experimental-696af53-20240625",
+    "eslint": "^9.6.0",
+    "eslint-config-next": "15.0.0-rc.0",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-0998c1e-20240625",
+    "postcss": "^8.4.39",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "tailwindcss": "4.0.0-alpha.17",
+    "typescript": "^5.5.3"
+  }
+}
