@@ -1,0 +1,84 @@
+name: PR Review
+
+permissions:
+  contents: write # to be able to: format code; publish release
+  pull-requests: write # to be able to comment on released pull requests
+
+on:
+  pull_request:
+    branches:
+      - production
+
+concurrency:
+  group: pr-review
+  cancel-in-progress: true
+
+jobs:
+  pr-review-job:
+    name: Review PR before merging  
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Use Code:
+      - uses: actions/checkout@v4
+
+      # Load Cache:
+      - id: pnpm_cache
+        name: Cache node modules
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ~/.gnupg
+            ~/.cache/pnpm
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      
+      # Setup PNPM:
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
+         
+      # Install Dependencies:
+      - name: Install dependencies
+        run: pnpm install
+
+      # Run Prettier:
+      - id: prettify
+        name: Code Formatting using Prettier
+        run: pnpm prettier . --check --write
+
+      # Commit Changes:
+      - id: sign_commit
+        name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      - id: push_commit
+        name: Push changes
+        continue-on-error: true
+        run: |
+          git add .
+          git diff-index --quiet HEAD || git commit -S -m "workflow job: apply formatting changes"
+          git push
+
+      # Build Errors:
+      - id: build_check
+        name: Build Next.js
+        run: |
+          pnpm lint
+          pnpm run type-check

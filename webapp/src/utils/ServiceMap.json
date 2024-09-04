@@ -1,0 +1,9 @@
+{
+  "lambda": "Lambda",
+  "dynamodb": "DynamoDB",
+  "logs": "Logs",
+  "s3": "S3",
+  "d2": "D2",
+  "frontend": "Frontend",
+  "crawlers": "crawlers"
+}

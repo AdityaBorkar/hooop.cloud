@@ -1,0 +1,10 @@
+{
+	"git.enableCommitSigning": true,
+	"tailwindCSS.experimental.classRegex": [
+		["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+		["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+	]
+	// "editor.codeActionsOnSave": {
+	//   "source.organizeImports.biome": "explicit"
+	// }
+}

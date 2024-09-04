@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Cloudflare",
+        "plugin": "cloudflare"
+    },
+    {
+        "name": "AWS",
+        "plugin": "aws"
+    }
+]

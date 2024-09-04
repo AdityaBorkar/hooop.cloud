@@ -1,0 +1,81 @@
+name: Production Release
+
+permissions:
+  contents: write # to be able to: format code; publish release
+  pull-requests: write # to be able to comment on released pull requests
+
+on:
+  push:
+    branches:
+      - production
+
+concurrency:
+  group: production-release
+  cancel-in-progress: true
+
+jobs:
+  prod-release:
+    name: Release to Production
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      # Use Code:
+      - uses: actions/checkout@v4
+
+      # Load Cache:
+      - id: pnpm_cache
+        name: Cache node modules
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ~/.sst
+            ~/.gnupg
+            ~/.cache/pnpm
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      
+      # Setup PNPM:
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
+         
+      # Install Dependencies:
+      - name: Install dependencies
+        run: pnpm install
+
+      # Install AWS:
+      # - id: init_aws
+      #   name: Install AWS
+      #   run: |
+      #     export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Install SST:
+      - id: init_sst
+        name: Install SST
+        run: |
+          if ! command -v sst &> /dev/null; then
+            echo "sst ion is not installed. Installing..."
+            curl -fsSL https://ion.sst.dev/install | bash
+            sst
+          else
+            echo "ion is already installed."
+          fi
+  
+      # Deploy to Production:
+      - id: deploy_production
+        name: Build and Deploy to Production
+        run: |
+          sst deploy --stage production

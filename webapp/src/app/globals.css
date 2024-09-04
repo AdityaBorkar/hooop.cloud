@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: var(--font-sans), sans-serif;
+  --font-family-mono: var(--font-mono), sans-serif;
+}
+
+@layer utilities {
+  * {
+    @apply transition-all cursor-default font-sans;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply text-white bg-black text-sm antialiased;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  details>summary {
+    list-style: none;
+  }
+
+  details>summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s !important;
+  } */
+}
+
+@view-transition {
+  navigation: auto;
+}
