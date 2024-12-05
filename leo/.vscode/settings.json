@@ -1,0 +1,11 @@
+{
+<<<<<<< HEAD
+  "git.enableCommitSigning": true,
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
+=======
+  "git.enableCommitSigning": true
+>>>>>>> 24fd0b0 (progress)
+}

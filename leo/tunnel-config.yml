@@ -1,0 +1,7 @@
+tunnel: 0f491a8e-24bc-426d-9735-42306559cf6a
+credentials-file: /home/aditya/.cloudflared/0f491a8e-24bc-426d-9735-42306559cf6a.json
+
+ingress:
+  - hostname: leo.platipie.com
+    service: https://localhost:3000
+  - service: http_status:404

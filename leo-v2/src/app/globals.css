@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+
+@layer utilities {
+  * {
+    @apply transition-all cursor-default
+  }
+
+  body {
+    @apply text-white bg-black;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  details>summary {
+    list-style: none;
+  }
+
+  details>summary::-webkit-details-marker {
+    display: none;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+
+}
