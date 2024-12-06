@@ -17,7 +17,7 @@ const config = {
   region: 'ap-south-1',
   credentials: {
     accessKeyId: 'AKIA52MX3VQJXYH5JY36',
-    secretAccessKey: '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',
+    secretAccessKey: '',
   },
 }
 
